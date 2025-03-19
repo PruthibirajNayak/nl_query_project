@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Language to SQL</title>
+</head>
+<body>
+    <h2>Natural Language to SQL Query</h2>
+    <form method="post">
+        <label for="nl_query">Enter Query:</label>
+        <input type="text" id="nl_query" name="nl_query" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if sql_query %}
+        <h3>Generated SQL:</h3>
+        <p><strong>SQL Query:</strong> {{ sql_query }}</p>
+
+        <h3>Query Result:</h3>
+        <table border="1">
+            <tr>
+                {% for column in result[0].keys() %}
+                    <th>{{ column }}</th>
+                {% endfor %}
+            </tr>
+            {% for row in result %}
+                <tr>
+                    {% for value in row.values() %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>
